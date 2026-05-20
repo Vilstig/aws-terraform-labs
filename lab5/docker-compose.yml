@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: 
+      context: ./cloud_backend 
+    ports:
+      - "8080:8080"
+    environment:
+      - CORS_ALLOWED_ORIGINS=http://localhost:3000
+    networks:
+      - app-network
+
+  frontend:
+    build: 
+      context: ./cloud_frontend 
+    ports:
+      - "3000:3000" 
+    environment:
+      - PUBLIC_API_BASE_URL=http://localhost:8080
+    depends_on:
+      - backend 
+    networks:
+      - app-network
+      
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,19 @@
+# Secrets
+*.pem
+*.key
+.env
+.env.*
+
+# Terraform (never publish state)
+**/.terraform/
+*.tfstate
+*.tfstate.*
+
+# Dependencies / build
+**/node_modules/
+**/.gradle/
+**/build/
+
+
+*.pdf
+*.docx
