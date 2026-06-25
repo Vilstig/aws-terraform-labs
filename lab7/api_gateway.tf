@@ -35,7 +35,6 @@ resource "aws_api_gateway_integration" "post_messages_lambda" {
   uri                     = aws_lambda_function.message_processor.invoke_arn
 }
 
-# ── OPTIONS /messages (CORS preflight — MOCK, bez Lambda) ────────────────────
 
 resource "aws_api_gateway_method" "options_messages" {
   rest_api_id   = aws_api_gateway_rest_api.main.id
@@ -87,7 +86,6 @@ resource "aws_api_gateway_integration_response" "options_200" {
   depends_on = [aws_api_gateway_integration.options_messages_mock]
 }
 
-# ── Lambda permission ─────────────────────────────────────────────────────────
 
 resource "aws_lambda_permission" "apigw_invoke" {
   statement_id  = "AllowAPIGatewayInvoke"
@@ -97,7 +95,6 @@ resource "aws_lambda_permission" "apigw_invoke" {
   source_arn    = "${aws_api_gateway_rest_api.main.execution_arn}/*/*"
 }
 
-# ── Deployment & Stage ────────────────────────────────────────────────────────
 
 resource "aws_api_gateway_deployment" "main" {
   rest_api_id = aws_api_gateway_rest_api.main.id

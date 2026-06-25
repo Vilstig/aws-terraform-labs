@@ -79,9 +79,10 @@
 			if (textToProcess.trim()) {
 				try {
 					const lambdaResult = await sendMessageViaLambda(username, textToProcess);
-					lambdaStatus = lambdaResult.containsPlacki
-						? 'Lambda: wykryto "placki" — wyslano powiadomienie SNS'
-						: 'Lambda: wiadomosc zapisana w DynamoDB';
+					lambdaStatus = ''
+					if (lambdaResult.containsPlacki)
+					 	lambdaStatus = 'Wykryto placki'
+						
 					setTimeout(() => (lambdaStatus = ''), 5000);
 				} catch (lambdaError) {
 					const msg = lambdaError instanceof Error ? lambdaError.message : String(lambdaError);

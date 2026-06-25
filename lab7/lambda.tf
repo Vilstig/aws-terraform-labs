@@ -14,7 +14,7 @@ resource "aws_lambda_function" "message_processor" {
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   handler          = "index.handler"
-  runtime          = "python3.12"
+  runtime          = "python3.13"
   role             = local.lambda_role_arn
   timeout          = 30
   memory_size      = 128
